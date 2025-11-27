@@ -44,13 +44,16 @@ st.markdown("""
     }
     
     /* Headers */
-    h1, h2, h3 {
+    h1, h2, h3, h4, h5, h6 {
         font-family: 'Space Grotesk', sans-serif !important;
         color: #ffffff !important;
-        margin-top: 1rem !important;
+        margin-top: 1.5rem !important;
         margin-bottom: 1rem !important;
-        line-height: 1.3 !important;
+        line-height: 1.4 !important;
         clear: both !important;
+        display: block !important;
+        position: relative !important;
+        z-index: 1 !important;
     }
 
     /* Body text */
@@ -62,14 +65,43 @@ st.markdown("""
     .streamlit-expanderHeader {
         font-family: 'Inter', sans-serif !important;
         font-size: 1rem !important;
-        padding: 0.5rem 0 !important;
+        padding: 0.75rem 0 !important;
+        display: block !important;
     }
 
     /* Ensure proper spacing for sections */
     .element-container {
-        margin-bottom: 0.5rem !important;
+        margin-bottom: 0.75rem !important;
+        display: block !important;
     }
-    
+
+    /* Fix markdown headers */
+    .stMarkdown h1, .stMarkdown h2, .stMarkdown h3,
+    .stMarkdown h4, .stMarkdown h5 {
+        padding-top: 0.5rem !important;
+        padding-bottom: 0.5rem !important;
+    }
+
+    /* Hide expander arrows that show as text */
+    .streamlit-expanderHeader::before {
+        content: '' !important;
+    }
+
+    /* Fix for material icons appearing as text */
+    span[class*="material-icons"] {
+        font-family: 'Material Icons' !important;
+    }
+
+    /* Ensure expander works correctly */
+    details summary {
+        display: list-item !important;
+        list-style-type: disclosure-closed !important;
+    }
+
+    details[open] summary {
+        list-style-type: disclosure-open !important;
+    }
+
     /* Metric cards */
     .metric-card {
         background: linear-gradient(135deg, #1e1e3f 0%, #2d2d5a 100%);
@@ -382,15 +414,21 @@ def main():
     
     # Check if model is loaded
     if predictor is None:
-        st.warning("""
+        st.error("""
         ⚠️ **Model not found!**
-        
+
         Please train the model first by running:
+
         ```bash
         python src/models/train.py
         ```
-        
-        For now, showing demo mode with simulated predictions.
+
+        For now, showing **demo mode** with simulated predictions.
+        """)
+
+        st.info("""
+        📝 **Note:** Demo mode uses rule-based predictions for demonstration purposes.
+        Train the actual ML model for accurate predictions.
         """)
         demo_mode = True
     else:
@@ -400,27 +438,32 @@ def main():
     # PAGE: SINGLE PREDICTION
     # ==========================================================================
     if page == "🎯 Single Prediction":
-        st.markdown("### Enter Customer Information")
-        
+        st.markdown("---")
+        st.markdown("## Enter Customer Information")
+        st.markdown("")
+
         # Input form with columns
         col1, col2, col3 = st.columns(3)
-        
+
         with col1:
-            st.markdown("##### 👤 Demographics")
+            st.markdown("#### 👤 Demographics")
+            st.markdown("")
             gender = st.selectbox("Gender", ["Male", "Female"])
             senior = st.selectbox("Senior Citizen", ["No", "Yes"])
             partner = st.selectbox("Partner", ["Yes", "No"])
             dependents = st.selectbox("Dependents", ["Yes", "No"])
-        
+
         with col2:
-            st.markdown("##### 📞 Services")
+            st.markdown("#### 📞 Services")
+            st.markdown("")
             phone_service = st.selectbox("Phone Service", ["Yes", "No"])
             internet = st.selectbox("Internet Service", ["Fiber optic", "DSL", "No"])
             online_security = st.selectbox("Online Security", ["Yes", "No", "No internet service"])
             tech_support = st.selectbox("Tech Support", ["Yes", "No", "No internet service"])
-        
+
         with col3:
-            st.markdown("##### 💳 Account")
+            st.markdown("#### 💳 Account")
+            st.markdown("")
             contract = st.selectbox("Contract", ["Month-to-month", "One year", "Two year"])
             payment = st.selectbox("Payment Method", [
                 "Electronic check", "Mailed check",
@@ -776,11 +819,13 @@ def main():
             st.plotly_chart(fig, use_container_width=True)
         
         # Methodology
-        st.markdown("### 📚 Methodology")
-        
+        st.markdown("---")
+        st.markdown("## 📚 Methodology")
+        st.markdown("")
+
         with st.expander("Learn more about the model"):
             st.markdown("""
-            #### CRISP-DM Framework
+            ### CRISP-DM Framework
             
             This project follows the Cross-Industry Standard Process for Data Mining:
             
@@ -790,15 +835,15 @@ def main():
             4. **Modeling**: Train and compare multiple ML algorithms
             5. **Evaluation**: Select best model based on ROC-AUC score
             6. **Deployment**: Serve predictions via this Streamlit application
-            
-            #### Algorithms Compared
-            
+
+            ### Algorithms Compared
+
             - Logistic Regression
             - Random Forest
             - XGBoost
             - LightGBM
-            
-            #### Key Insights
+
+            ### Key Insights
             
             The most important factors for predicting churn are:
             - **Contract Type**: Month-to-month contracts have highest churn risk
