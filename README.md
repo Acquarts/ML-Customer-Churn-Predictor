@@ -266,9 +266,9 @@ Contributions are welcome! Please read our [Contributing Guidelines](CONTRIBUTIN
 
 ## 👤 Author
 
-**Tu Nombre**
-- LinkedIn: [tu-linkedin](https://linkedin.com/in/tu-perfil)
-- GitHub: [@tu-github](https://github.com/tu-usuario)
+**Adrian Zambrana Acquaroni**
+- LinkedIn: [adrianzambranaacquaroni](https://www.linkedin.com/in/adrianzambranaacquaroni/)
+- GitHub: [@Acquarts](https://github.com/Acquarts)
 
 ---
 
