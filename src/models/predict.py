@@ -380,33 +380,33 @@ if __name__ == "__main__":
     args = parser.parse_args()
     
     if args.sample:
-        print("🔮 Churn Predictor Demo")
+        print("Churn Predictor Demo")
         print("="*50)
-        
+
         try:
             predictor = ChurnPredictor()
-            
+
             # Sample customer
             customer = create_sample_customer()
-            print("\n📋 Customer Profile:")
+            print("\nCustomer Profile:")
             for key, value in customer.items():
                 print(f"   {key}: {value}")
-            
+
             # Make prediction
             result = predictor.predict(customer)
-            
-            print("\n🎯 Prediction Result:")
+
+            print("\nPrediction Result:")
             print(f"   Churn: {result['churn_label']}")
             print(f"   Probability: {result['probability']:.1%}")
             print(f"   Risk Level: {result['risk_level']}")
             print(f"   Confidence: {result['confidence']:.1%}")
-            
+
             # Risk factors
-            print("\n⚠️  Risk Factors:")
+            print("\nRisk Factors:")
             for factor in predictor.get_risk_factors(customer):
-                print(f"   • {factor['factor']} ({factor['impact']} impact)")
-                print(f"     → {factor['recommendation']}")
-            
+                print(f"   - {factor['factor']} ({factor['impact']} impact)")
+                print(f"     -> {factor['recommendation']}")
+
         except FileNotFoundError as e:
-            print(f"\n❌ Error: {e}")
+            print(f"\nError: {e}")
             print("   Please train the model first: python src/models/train.py")

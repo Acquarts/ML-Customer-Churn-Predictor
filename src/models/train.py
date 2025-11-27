@@ -511,39 +511,39 @@ if __name__ == "__main__":
     args = parser.parse_args()
     
     # Load and preprocess data
-    print("📥 Loading data...")
+    print("Loading data...")
     loader = DataLoader(config_path=args.config)
     df = loader.load_data()
-    
-    print("🔧 Preprocessing data...")
+
+    print("Preprocessing data...")
     preprocessor = DataPreprocessor(config_path=args.config)
     X_train, X_test, y_train, y_test = preprocessor.fit_transform(df)
     feature_names = preprocessor.get_feature_names()
-    
+
     # Train models
-    print("\n🚀 Training models...")
+    print("\nTraining models...")
     trainer = ModelTrainer(config_path=args.config)
     best_model = trainer.train(
         X_train, y_train,
         X_test, y_test,
         feature_names=feature_names
     )
-    
+
     # Print results
-    print("\n📊 Results Summary:")
+    print("\nResults Summary:")
     print(trainer.get_results_summary())
-    
-    print("\n📈 Feature Importance (Top 10):")
+
+    print("\nFeature Importance (Top 10):")
     print(trainer.get_feature_importance(top_n=10))
-    
+
     # Print classification report
     y_pred = best_model.predict(X_test)
     print_classification_report(y_test, y_pred)
-    
+
     # Save model and preprocessor
     trainer.save_model()
     preprocessor.save()
-    
-    print("\n✅ Training complete!")
+
+    print("\nTraining complete!")
     print(f"   Best model: {trainer.best_model_name}")
     print(f"   Model saved to: models/best_model.pkl")

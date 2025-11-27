@@ -49,4 +49,4 @@ metrics:
   recall: 0.6019900497512438
   roc_auc: 0.7001808237857386
 model_name: random_forest
-training_date: '2025-11-26T18:04:32.137749'
+training_date: '2025-11-27T01:21:36.725089'
