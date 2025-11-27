@@ -40,13 +40,13 @@ feature_names:
 - cat__PaymentMethod_Electronic check
 - cat__PaymentMethod_Mailed check
 metrics:
-  accuracy: 0.6572036905606813
-  average_precision: 0.4755231768363376
-  cv_score_mean: 0.7166532713474022
-  cv_score_std: 0.015747708744278114
-  f1: 0.500517063081696
-  precision: 0.4283185840707965
-  recall: 0.6019900497512438
-  roc_auc: 0.7001808237857386
-model_name: random_forest
-training_date: '2025-11-27T01:21:36.725089'
+  accuracy: 0.7381121362668559
+  average_precision: 0.6327539780893255
+  cv_score_mean: 0.8459842483549689
+  cv_score_std: 0.012432354091529712
+  f1: 0.6136125654450262
+  precision: 0.504302925989673
+  recall: 0.7834224598930482
+  roc_auc: 0.8416492288615051
+model_name: logistic_regression
+training_date: '2025-11-27T01:28:03.982173'
